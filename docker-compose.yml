@@ -1,6 +1,6 @@
 version : "3.3"
 services : 
-  connectors :
+  connector-management :
     build : .
     image : worker-01:5000/connector-management
     networks: 
