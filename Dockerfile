@@ -21,13 +21,6 @@ ADD . /app
 #     apt-get -y install docker-ce
     # https://getintodevops.com/blog/the-simple-way-to-run-docker-in-docker-for-ci
 
-# Set timezone 
-# ENV TZ=Asia/Bangkok 
-# RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
-# Set localhost 
-# RUN echo '127.0.0.1   localhost localhost.localdomain' >> /etc/hosts
-
 ENV NODE_ENV=production_swarm
 EXPOSE 5001
 
