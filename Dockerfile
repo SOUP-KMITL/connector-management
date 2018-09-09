@@ -28,6 +28,7 @@ ADD . /app
 # Set localhost 
 # RUN echo '127.0.0.1   localhost localhost.localdomain' >> /etc/hosts
 
+ENV NODE_ENV=production_swarm
 EXPOSE 5001
 
-CMD [ "npm" ,"start" ]
+CMD ["npm" ,"start" ]
