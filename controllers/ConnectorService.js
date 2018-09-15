@@ -176,7 +176,7 @@ function deployConnector(args, body, res){
       ' -e TSREQUIRED=' + body.tsRequired +
       ' -e CRON=' + '"' + body.cron + '"'
     if (process.env.NODE_ENV == "development") {
-      dockerCreateScript = 'docker run -d --name=' + dockerImageName + ' ' + env + ' ' + dockerImageUrl
+      dockerCreateScript = 'docker run -d --restart --name=' + dockerImageName + ' ' + env + ' ' + dockerImageUrl
     }
     else if (process.env.NODE_ENV == "production_swarm") {
       const network = 'ticketing_default_test'
