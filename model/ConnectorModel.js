@@ -22,7 +22,7 @@ exports.getAllConnector = function(args, res, next) {
     try {
         db.connectors.find({}, queryModel).toArray(function (err, doc) {
             res.status(200)
-            res.end(doc)
+            res.end(JSON.stringify({"contents": doc}))
         })
     }
     catch (e) {
@@ -55,7 +55,7 @@ exports.getConnectorByCollectionId = function (collectionId, Authorizaion, res, 
     try {
         db.connectors.find({ collectionId: collectionId }, queryModel).toArray(function (err, doc) {
             res.status(200)
-            res.end(doc)
+            res.end(JSON.stringify({"contents": doc}))
         })
     }
     catch (e) {
@@ -88,7 +88,7 @@ exports.getConnectorByUsername = function (user, Authorizaion, next) {
     try {
         db.connectors.find({ user: user }, queryModel).toArray(function (err, doc) {
             res.status(200)
-            res.end(doc)
+            res.end(JSON.stringify({"contents": doc}))
         })
     }
     catch (e) {
