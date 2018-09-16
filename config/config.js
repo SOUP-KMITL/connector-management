@@ -7,7 +7,7 @@ if (process.env.NODE_ENV == "development"){
     databaseUrl = 'localhost:27017/connector'
     collections = ['connectors']
 }
-if (process.env.NODE_ENV == "production_swarm") {
+if (process.env.NODE_ENV == "production_swarm" || process.env.NODE_ENV == "production") {
     // Mapping mongo to host ip
     // In docker-compose file 
     //    extra_hosts :

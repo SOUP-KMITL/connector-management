@@ -162,7 +162,8 @@ function deployConnector(args, body, res){
   const dockerImageName = "connector-" + args.collectionId.value
   console.log("Deploying...")
   //--secret
-  if (process.env.NODE_ENV == "development" || process.env.NODE_ENV == "production_swarm") {
+  if (process.env.NODE_ENV == "development" || process.env.NODE_ENV == "production_swarm" || process.env.NODE_ENV == "production") {
+    dockerImageUrl = "worker-01:5000/connector-image"
     let dockerCreateScript = ""
     const env =
       ' -e COLLECTIONID=' + args.collectionId.value +
@@ -175,7 +176,7 @@ function deployConnector(args, body, res){
       ' -e ISARRAY=' + body.isArray +
       ' -e TSREQUIRED=' + body.tsRequired +
       ' -e CRON=' + '"' + body.cron + '"'
-    if (process.env.NODE_ENV == "development") {
+    if (process.env.NODE_ENV == "development" || process.env.NODE_ENV == "production") {
       dockerCreateScript = 'docker run -d --restart always --name=' + dockerImageName + ' ' + env + ' ' + dockerImageUrl
     }
     else if (process.env.NODE_ENV == "production_swarm") {
@@ -206,8 +207,9 @@ function deployConnector(args, body, res){
 }
 
 function insertConnector(args, body){
-    body["user"] = args.user.value
-    body["createdAt"] = new Date().getTime()
+  body["user"] = args.user.value
+  body["createdAt"] = new Date().getTime()
+  try {
     db.connector.insert(
       body,
       function (err, doc) {
@@ -215,6 +217,10 @@ function insertConnector(args, body){
         db.close()
       }
     )
+  }
+  catch (e) {
+    console.log("Inserted connector error:", e)
+  }
 }
 
 function updateConnectorEnv(body ,serviceId){
@@ -222,14 +228,19 @@ function updateConnectorEnv(body ,serviceId){
     // console.log('Exit code:', code);
     if (code == 0) {
       // console.log('Program output:', stdout)
-      db.connector.update(
-        { collectionId: collectionId },
-        { $set: body },
-        function (err, doc) {
-          // res.status(204)
-          // res.end("Connector updated successfully")
-        }
-      )
+      try {
+        db.connector.update(
+          { collectionId: collectionId },
+          { $set: body },
+          function (err, doc) {
+            // res.status(204)
+            // res.end("Connector updated successfully")
+          }
+        )
+      }
+      catch (e) {
+        console.log("Updated connector error:", e)
+      }
       res.status(204)
       res.write('Connector updated successfully')
     }
@@ -246,13 +257,18 @@ function removeConnector(serviceId){
     // console.log('Exit code:', code);
     if (code == 0) {
       // console.log('Program output:', stdout)
-      db.connector.remove(
-        { collectionId: collectionId }, 
-        function (err, doc) {
-          res.status(204)
-          res.end("Connector removed successfully")
-        }
-      )
+      try {
+        db.connector.remove(
+          { collectionId: collectionId },
+          function (err, doc) {
+            res.status(204)
+            res.end("Connector removed successfully")
+          }
+        )
+      }
+      catch (e) {
+        console.log("Removed connector error:", e)
+      }
       res.status(204)
       res.write('Connector removed successfully')
     }

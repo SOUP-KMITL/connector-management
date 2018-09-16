@@ -21,7 +21,7 @@ RUN apt-get update && \
     apt-get -y install docker-ce
     # https://getintodevops.com/blog/the-simple-way-to-run-docker-in-docker-for-ci
 
-ENV NODE_ENV=development
+ENV NODE_ENV=production
 EXPOSE 5001
 
 CMD ["npm" ,"start" ]

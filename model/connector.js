@@ -20,10 +20,15 @@ exports.getAllConnector = function(args, res, next) {
         time:1,
         createdAt: 1
     }
-    db.connector.find({}, queryModel).toArray(function (err, doc) {
-        res.status(200)
-        res.end(doc)
-    })
+    try {
+        db.connector.find({}, queryModel).toArray(function (err, doc) {
+            res.status(200)
+            res.end(doc)
+        })
+    }
+    catch (e) {
+        console.log("DB error:", e)
+    }
 }
   
 exports.getConnectorByCollectionId = function (collectionId, Authorizaion, res, next) {
@@ -46,13 +51,18 @@ exports.getConnectorByCollectionId = function (collectionId, Authorizaion, res, 
         time:1,
         createdAt: 1
     }
-    if (validateToken(user, Authorizaion)){
+    if (validateToken(user, Authorizaion)) {
         queryModel['endpoint'] = 1
     }
-    db.connector.find({collectionId: collectionId}, queryModel).toArray(function (err, doc) {
-        res.status(200)
-        res.end(doc)
-    })
+    try {
+        db.connector.find({ collectionId: collectionId }, queryModel).toArray(function (err, doc) {
+            res.status(200)
+            res.end(doc)
+        })
+    }
+    catch (e) {
+        console.log("DB error:", e)
+    }
 }
 
 exports.getConnectorByUsername = function (user, Authorizaion, next) {
@@ -78,10 +88,15 @@ exports.getConnectorByUsername = function (user, Authorizaion, next) {
     if (validateToken(user, Authorizaion)){
         queryModel['endpoint'] = 1
     }
-    db.connector.find({user: user}, queryModel).toArray(function (err, doc) {
-        res.status(200)
-        res.end(doc)
-    })
+    try {
+        db.connector.find({ user: user }, queryModel).toArray(function (err, doc) {
+            res.status(200)
+            res.end(doc)
+        })
+    }
+    catch (e) {
+        console.log("DB error:", e)
+    }
 }
 
 // exports.updateConnector = function (user, Authorizaion, next) {
