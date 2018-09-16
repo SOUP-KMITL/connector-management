@@ -158,7 +158,7 @@ function validateToken(args){
 }
 
 function deployConnector(args, body, res){
-  const dockerImageUrl = "registry.smartcity.kmitl.io/connector-image"
+  let dockerImageUrl = "registry.smartcity.kmitl.io/connector-image"
   const dockerImageName = "connector-" + args.collectionId.value
   console.log("Deploying...")
   //--secret
