@@ -3,7 +3,7 @@
 var url = require('url');
 
 var Connector = require('./ConnectorService');
-var ConnectorModel = require('../model/connector')
+var ConnectorModel = require('../model/ConnectorModel')
 
 module.exports.getAllConnector = function getAllConnector (req, res, next) {
   ConnectorModel.getAllConnector(req.swagger.params, res, next);
