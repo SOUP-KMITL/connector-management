@@ -210,7 +210,7 @@ function insertConnector(args, body){
   body["user"] = args.user.value
   body["createdAt"] = new Date().getTime()
   try {
-    db.connector.insert(
+    db.connectors.insert(
       body,
       function (err, doc) {
         if (err) console.log('DB Err', err)
@@ -229,7 +229,7 @@ function updateConnectorEnv(body ,serviceId){
     if (code == 0) {
       // console.log('Program output:', stdout)
       try {
-        db.connector.update(
+        db.connectors.update(
           { collectionId: collectionId },
           { $set: body },
           function (err, doc) {
@@ -258,7 +258,7 @@ function removeConnector(serviceId){
     if (code == 0) {
       // console.log('Program output:', stdout)
       try {
-        db.connector.remove(
+        db.connectors.remove(
           { collectionId: collectionId },
           function (err, doc) {
             res.status(204)

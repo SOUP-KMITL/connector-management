@@ -21,7 +21,7 @@ exports.getAllConnector = function(args, res, next) {
         createdAt: 1
     }
     try {
-        db.connector.find({}, queryModel).toArray(function (err, doc) {
+        db.connectors.find({}, queryModel).toArray(function (err, doc) {
             res.status(200)
             res.end(doc)
         })
@@ -55,7 +55,7 @@ exports.getConnectorByCollectionId = function (collectionId, Authorizaion, res, 
         queryModel['endpoint'] = 1
     }
     try {
-        db.connector.find({ collectionId: collectionId }, queryModel).toArray(function (err, doc) {
+        db.connectors.find({ collectionId: collectionId }, queryModel).toArray(function (err, doc) {
             res.status(200)
             res.end(doc)
         })
@@ -89,7 +89,7 @@ exports.getConnectorByUsername = function (user, Authorizaion, next) {
         queryModel['endpoint'] = 1
     }
     try {
-        db.connector.find({ user: user }, queryModel).toArray(function (err, doc) {
+        db.connectors.find({ user: user }, queryModel).toArray(function (err, doc) {
             res.status(200)
             res.end(doc)
         })
@@ -140,7 +140,7 @@ exports.getConnectorByUsername = function (user, Authorizaion, next) {
 //      **/        
 //     if (Authorizaion != undefined){
 //         if (validateToken(user, Authorizaion)) {
-//             db.connector.remove({ collectionId: collectionId }, function (err, doc) {
+//             db.connectors.remove({ collectionId: collectionId }, function (err, doc) {
 //                 res.status(204)
 //                 res.end("Connector deleted successfully")
 //             })
