@@ -1,4 +1,4 @@
-FROM node:8.10.0-slim
+FROM node:8.15.0-slim
 
 # Set the working directory to /app
 WORKDIR /app
