@@ -14,7 +14,7 @@ info:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
 host: 'localhost:5001'
-basePath: /
+basePath: /connectors
 tags:
   - name: connector
     description: API Connector User's Management
@@ -24,7 +24,7 @@ tags:
 schemes:
   - https
 paths:
-  /connectors:
+  /:
     get:
       tags:
         - connector
@@ -78,7 +78,7 @@ paths:
         default:
           description: successful operation
       x-swagger-router-controller: Connector
-  '/connectors/{collectionId}':
+  '/{collectionId}':
     get:
       tags:
         - connector
@@ -147,7 +147,7 @@ paths:
         '404':
           description: User not found
       x-swagger-router-controller: User
-  '/connectors/user/{username}':
+  '/user/{username}':
     get:
       tags:
         - connector
